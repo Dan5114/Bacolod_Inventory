@@ -1,0 +1,100 @@
+/* General Body Styling */
+body {
+    background-image: url('../images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* White fallback color */
+    color: #010101; /* Black Text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Login Form Container */
+.login-container {
+    background: #ffffff; /* White Background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: #010101; /* Black Text */
+}
+
+/* Form Heading */
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Input Fields */
+input {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #bcbcbc; /* Gray Border */
+    border-radius: 5px;
+    background: #f7f7f7; /* Light Gray Background */
+}
+
+/* Button */
+button {
+    padding: 10px 20px;
+    background: #fdcc0a; /* Yellow Button */
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background: #a5860c; /* Darker Yellow */
+    color: #ffffff; /* White Text */
+}
+
+/* Error Messages */
+.error {
+    color: #fdcc0a; /* Yellow Error Text */
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* Links */
+a {
+    color: #fdcc0a; /* Yellow Links */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #a5860c; /* Darker Yellow */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 20px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    input {
+        padding: 12px;
+    }
+
+    button {
+        padding: 12px;
+    }
+}

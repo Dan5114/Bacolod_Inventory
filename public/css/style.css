@@ -1,0 +1,230 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #2B2B2B; /* Black Text */
+    justify-content: center;
+    align-items: center;
+    background-color: #2B2B2B; /* Dark background specific to the welcome section */
+}
+
+/* Main Container */
+.home-container {
+    background: #ffffffe3; /* White Background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 1000px;
+    color: #010101; /* Black Text */
+}
+
+/* Headings */
+h1, h2 {
+    color: #2B2B2B; /* Black Text */
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    color: #2B2B2B; /* Black Text */
+}
+
+th, td {
+    padding: 15px;
+    border: 1px solid #bcbcbc; /* Gray Border */
+}
+
+th {
+    background: #fdcc0a; /* Yellow Background */
+    color: #2B2B2B; /* Black Text */
+}
+
+td {
+    text-align: center;
+}
+
+/* Buttons */
+button, .button {
+    background: #fdcc0a; /* Yellow Background */
+    color: #2B2B2B; /* Black Text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button:hover, .button:hover {
+    background: #a5860c; /* Darker Yellow */
+    color: #2B2B2B; /* White Text */
+}
+
+/* Links */
+a {
+    color: #fdcc0a; /* Yellow Links */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #a5860c; /* Darker Yellow Hover */
+}
+
+/* Error Messages */
+.error {
+    color: #fdcc0a; /* Yellow Error Text */
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* Logout Button */
+.logout-button {
+    background: #fdcc0a; /* Yellow Background */
+    color: #2B2B2B; /* Black Text */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.logout-button:hover {
+    background: #a5860c; /* Darker Yellow */
+    color: #ffffff; /* White Text */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.9em;
+    }
+
+    .home-container {
+        padding: 20px;
+    }
+}
+
+/* Welcome Section Styles */
+.welcome-section {
+    background-color: #2B2B2B; /* Dark background specific to the welcome section */
+    color: #FFFFFF; /* Bright text for contrast */
+    padding: 50px 50px; /* Inner spacing for the section */
+    text-align: center; /* Center-align text */
+    border-radius: 15px; /* Rounded corners */
+}
+
+/* Welcome Message Heading */
+.welcome-section h1 {
+    font-family: 'Impact', 'Arial Black', sans-serif; /* Bulky, bold font style */
+    font-size: 3rem; /* Large font size for emphasis */
+    font-weight: bold; /* Ensure maximum boldness */
+    margin: 0; /* Remove extra margins */
+    letter-spacing: 2px; /* Add space between letters */
+}
+
+/* Section container for the form */
+.search-section {
+    padding: 10px;
+    background-color: #2B2B2B; /* Dark background specific to the welcome section */
+    margin: 10px auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex; /* Align form elements in one line */
+    justify-content: space-between; /* Distribute items across the line */
+    align-items: center; /* Vertically center items */
+}
+
+/* Search form container */
+.search-form {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    background-color: #2B2B2B; /* Dark background specific to the welcome section */
+}
+
+/* Sticky class applied when the form should stick to the top */
+.search-form.sticky {
+    position: fixed;
+    top: 0; /* Stick it to the top */
+    left: 0; /* Align it with the left edge of the viewport */
+    z-index: 1000; /* Ensure it stays on top */
+    background-color: #2B2B2B; /* Dark background specific to the welcome section */
+    padding: 10px 20px; /* Padding to keep the layout */
+    border-radius: 0px 0px 20px 20px;
+}
+
+/* To prevent content from being hidden under the fixed form */
+body {
+    padding-top: 60px; /* Adjust based on the height of your form */
+}
+
+/* Username display */
+.username-display {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-right: 20px; /* Adjust space between elements */
+}
+
+/* Search Input Field */
+.search-input {
+    width: 200px; /* Adjust width for one line */
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 20px; /* Adjust space between elements */
+}
+
+/* Add Item Button */
+.add-item-btn {
+    padding: 10px 20px;
+    background-color: #2B2B2B; /* Dark background specific to the welcome section */
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 20px; /* Adjust space between elements */
+}
+
+/* Return Button */
+.return-btn {
+    padding: 10px 20px;
+    background-color: #2B2B2B; /* Dark background */
+    color: #fff; /* White text */
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 20px; /* Adjust space between elements */
+}
+
+/* Logout Button */
+.logout-btn {
+    padding: 10px 20px;
+    background-color: #2B2B2B; /* Dark background */
+    color: #fff; /* White text */
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
