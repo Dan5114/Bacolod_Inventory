@@ -3,27 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\WarehouseItem;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class WarehouseItemController extends Controller
 {
-    public function index(Request $r)
+    public function index(Request $request)
     {
-        $allowed = ['id','name','quantity','price','created_at'];
-        $sort  = in_array($r->sort, $allowed) ? $r->sort : 'id';
-        $order = strtoupper($r->order) === 'DESC' ? 'DESC' : 'ASC';
+        $query = WarehouseItem::query();
 
-        $q = WarehouseItem::query();
-        if ($r->filled('search')) {
-            $term = $r->search.'%';
-            $q->where('name','like',$term)->orWhere('id','like',$term);
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', $search . '%')
+                  ->orWhere('id', 'like', $search . '%');
         }
-        $items = $q->orderBy($sort,$order)
-                   ->paginate(10)
-                   ->withQueryString();
 
-        return view('items.index', compact('items','sort','order'));
+        $items = $query->orderBy('created_at', 'desc')->paginate(8);
+
+        return view('items.index', compact('items'));
     }
 
     public function create()
@@ -39,8 +37,16 @@ class WarehouseItemController extends Controller
             'quantity'    => 'required|integer|min:0',
             'price'       => 'required|numeric|min:0',
         ]);
-        WarehouseItem::create($r->only('name','description','quantity','price'));
-        return redirect()->route('inventory')->with('success','Item added');
+
+        $item = WarehouseItem::create($r->only('name', 'description', 'quantity', 'price'));
+
+        ActivityLog::create([
+            'user_id' => auth()->id(),
+            'action'  => 'Created Item',
+            'details' => $item->name,
+        ]);
+
+        return redirect()->route('inventory')->with('success', 'Item added');
     }
 
     public function edit(WarehouseItem $item)
@@ -56,25 +62,53 @@ class WarehouseItemController extends Controller
             'quantity'    => 'required|integer|min:0',
             'price'       => 'required|numeric|min:0',
         ]);
-        $item->update($r->only('name','description','quantity','price'));
-        return redirect()->route('inventory')->with('success','Item updated');
+
+        $item->update($r->only('name', 'description', 'quantity', 'price'));
+
+        ActivityLog::create([
+            'user_id' => auth()->id(),
+            'action'  => 'Updated Item',
+            'details' => $item->name,
+        ]);
+
+        return redirect()->route('inventory')->with('success', 'Item updated');
     }
 
     public function destroy(WarehouseItem $item)
     {
+        $itemName = $item->name;
         $item->delete();
-        return redirect()->route('inventory')->with('success','Item deleted');
+
+        ActivityLog::create([
+            'user_id' => auth()->id(),
+            'action'  => 'Deleted Item',
+            'details' => $itemName,
+        ]);
+
+        return redirect()->route('inventory')->with('success', 'Item deleted');
     }
 
     public function checkout(Request $r, WarehouseItem $item)
     {
         $r->validate([
-            'quantity' => 'required|integer|min:1|max:'.$item->quantity,
+            'quantity' => 'required|integer|min:1|max:' . $item->quantity,
         ]);
 
         DB::transaction(fn() => $item->decrement('quantity', $r->quantity));
 
-        return redirect()->route('inventory')
-                         ->with('success','Checked out '.$r->quantity.' units.');
+        ActivityLog::create([
+            'user_id' => auth()->id(),
+            'action'  => 'Checked Out Item',
+            'details' => $r->quantity . ' x ' . $item->name,
+        ]);
+
+        return redirect()->route('inventory')->with('success', 'Checked out ' . $r->quantity . ' units.');
+    }
+
+    public function cart()
+    {
+        $cart = session('cart', []);
+        $items = WarehouseItem::whereIn('id', array_keys($cart))->get();
+        return view('cart.index', compact('items', 'cart'));
     }
 }

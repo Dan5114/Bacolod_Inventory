@@ -13,50 +13,62 @@
       background: url('{{ asset('images/bg.jpg') }}') center/cover no-repeat fixed;
       min-height: 100vh;
     }
-    .card-title { font-family: inherit; } /* keep legacy font */
   </style>
 </head>
 <body>
-  @auth
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('inventory') }}">
-          <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height:40px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navCollapse">
-          <form class="d-flex ms-auto me-3" method="GET" action="{{ route('inventory') }}">
-            <input class="form-control me-2" type="search" name="search"
-                   placeholder="Search by Name or ID" value="{{ request('search') }}">
-            <button class="btn btn-primary" type="submit">Search</button>
-          </form>
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item me-3">
-              <a class="btn btn-warning position-relative" href="{{ route('cart.index') }}">
-                <i class="fas fa-shopping-cart"></i>
-                @php $count = session('cart',[]); @endphp
-                @if(count($count))
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ array_sum($count) }}
-                  </span>
-                @endif
-              </a>
-            </li>
-            <li class="nav-item">
-              <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button class="btn btn-outline-light">Logout</button>
-              </form>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  @endauth
+@auth
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm w-100">
+  <div class="container-fluid">
 
-  <div class="container-fluid py-4">
+    <!-- Logo -->
+    <a class="navbar-brand me-3" href="{{ route('inventory') }}">
+      <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 40px;">
+    </a>
+
+    <!-- Toggle for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navigation content -->
+    <div class="collapse navbar-collapse justify-content-between" id="mainNav">
+      <!-- Search -->
+      <form class="d-flex w-100 me-3" method="GET" action="{{ route('inventory') }}">
+        <input class="form-control me-2" type="search" name="search" placeholder="Search by Name or ID" value="{{ request('search') }}">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+
+      <!-- Cart + Logout -->
+      <div class="d-flex align-items-center gap-3">
+        <a class="btn btn-warning position-relative" href="{{ route('cart.index') }}">
+          <i class="fas fa-shopping-cart"></i>
+          @php $count = session('cart',[]); @endphp
+          @if(array_sum($count) > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ array_sum($count) }}
+            </span>
+          @endif
+        </a>
+
+        <form method="POST" action="{{ route('logout') }}">
+          @csrf
+          <button class="btn btn-outline-light">Logout</button>
+
+           <!-- View Logs -->
+<a class="btn btn-outline-info" href="{{ route('logs.index') }}">Activity Logs</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+@endauth
+
+
+
+
+
+
+  <div class="container py-4">
     @if(session('success'))
       <div class="alert alert-success">{{ session('success') }}</div>
     @endif
