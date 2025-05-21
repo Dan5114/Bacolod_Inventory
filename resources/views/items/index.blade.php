@@ -30,12 +30,12 @@
 
           <div class="mt-auto d-grid gap-2">
             @can('checkout', $item)
-              <form method="POST" action="{{ route('cart.add', $item) }}">
-                @csrf
-                <button class="btn btn-outline-success btn-sm">
-                  <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
-              </form>
+              <form method="POST" action="{{ route('cart.add', $item) }}" class="d-flex mt-2">
+  @csrf
+  <input type="number" name="quantity" min="1" max="{{ $item->quantity }}" value="1" class="form-control form-control-sm me-2" style="width: 80px;">
+  <button class="btn btn-sm btn-success">Add to Cart</button>
+</form>
+
               <form method="POST" action="{{ route('items.checkout', $item) }}" class="d-flex mt-1">
                 @csrf
                 <input type="number" name="quantity" value="1" min="1" max="{{ $item->quantity }}"

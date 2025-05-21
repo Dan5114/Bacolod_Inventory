@@ -2,7 +2,9 @@
 @section('title','Your Cart')
 
 @section('content')
-<h2 class="mb-4">Shopping Cart</h2>
+<h2 class="mb-4 text-white fw-bold text-center" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">
+  Shopping Cart
+</h2>
 
 @if(empty($cart))
   <p>Your cart is empty. <a href="{{ route('inventory') }}">Go shopping!</a></p>
@@ -10,7 +12,7 @@
   <table class="table table-bordered table-striped bg-white">
     <thead>
       <tr>
-        <th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th><th>Action</th>
+        <th>Item</th><th style="width: 200px;">Qty</th><th>Price</th><th>Subtotal</th><th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +26,8 @@
               @csrf
               <input type="number" name="quantity" value="{{ $qty }}" min="1" max="{{ $item->quantity }}"
                      class="form-control form-control-sm me-2" style="width:80px;">
-              <button class="btn btn-sm btn-primary">Update</button>
+              <button class="btn btn-sm btn-primary" style="width: 100px;">Update</button>
+
             </form>
           </td>
           <td>₱{{ number_format($item->price,2) }}</td>

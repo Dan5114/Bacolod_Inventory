@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','Edit Item')
 @section('content')
-<div class="container py-4">
+<div class="container mt-4">
   <h2>Edit Item #{{ $item->id }}</h2>
   <form method="POST" action="{{ route('items.update',$item) }}" class="mt-3">
     @csrf @method('PUT')

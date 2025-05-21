@@ -2,6 +2,7 @@
 @section('title', 'Activity Logs')
 
 @section('content')
+<div class ="container mt-4">
 <h4 class="text-white mb-4">Activity Logs</h4>
 
 <table class="table table-bordered bg-white">

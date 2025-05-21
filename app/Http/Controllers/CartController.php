@@ -15,13 +15,25 @@ class CartController extends Controller
         return view('cart.index', compact('items','cart'));
     }
 
-    public function add(Request $r, WarehouseItem $item)
-    {
-        $cart = $r->session()->get('cart', []);
-        $cart[$item->id] = ($cart[$item->id] ?? 0) + 1;
-        $r->session()->put('cart', $cart);
-        return back()->with('success','Added to cart');
+    public function add(Request $request, WarehouseItem $item)
+{
+    $validated = $request->validate([
+        'quantity' => 'required|integer|min:1|max:' . $item->quantity,
+    ]);
+
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$item->id])) {
+        $cart[$item->id] += $validated['quantity'];
+    } else {
+        $cart[$item->id] = $validated['quantity'];
     }
+
+    session()->put('cart', $cart);
+
+    return back()->with('success', $validated['quantity'] . ' item(s) added to cart.');
+}
+
 
     public function update(Request $r, WarehouseItem $item)
     {

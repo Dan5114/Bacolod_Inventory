@@ -10,15 +10,24 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background: url('{{ asset('images/bg.jpg') }}') center/cover no-repeat fixed;
-      min-height: 100vh;
+      body {
+    background: url('{{ asset('images/bg.jpg') }}') center center/cover no-repeat fixed;
+    min-height: 100vh;
+    padding-top: 80px; /* Adjusted to match actual navbar height */
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding-top: 100px; /* Extra space on small screens */
     }
+  }
+}
   </style>
 </head>
 <body>
 @auth
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm w-100">
-  <div class="container-fluid">
+  <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap gap-3">
 
     <!-- Logo -->
     <a class="navbar-brand me-3" href="{{ route('inventory') }}">
